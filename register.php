@@ -45,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $email_err = "Please enter a your email.";     
     } 
     else{
-        $email = trim($_POST["Email"]);
+        $email = trim($_POST["email"]);
     }
 
     
