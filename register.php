@@ -2,7 +2,7 @@
 require_once "config.php";
  
 $username = $password = $confirm_password = $email = "";
-$username_err = $password_err = $confirm_password_err = $email_err"";
+$username_err = $password_err = $confirm_password_err = $email_err ="";
  
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
