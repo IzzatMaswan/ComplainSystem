@@ -48,20 +48,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $email = trim($_POST["email"]);
     }
 
-    if (isset($_POST["gender"])) 
-    {
-    if ($_POST["gender"] == 'M') 
-    {
-        $message = '<b><p>Good Day, Sir </b></p>';
-    }
-    if ($_POST["gender"] == 'F') 
-    {
-        $message = '<b><p>Good Day, Madam </b></p>';
-    }
-    }else{
-        $_POST["gender"] = null;
-        echo '<p><b> You Forgot to Choose Your Gender! </b></p>';
-    }
     
     // Validate password
     if(empty(trim($_POST["password"]))){
@@ -140,16 +126,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
                 <span class="invalid-feedback"><?php echo $email_err; ?></span>
             </div>
-            <p><b>Gender</b>
-            <input type="radio" name="gender" value="M"/> Male 
-            <input type="radio" name="gender" value="F"/> Female
-            </p>
-            <p><b>Age:</b>
-            <select name="age" >
-                <option value="0-30">Under 30</option>
-                <option value="30-60">Between 30 to 60</option>
-                <option value="60+">over 60</option>
-            </select></p>
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
