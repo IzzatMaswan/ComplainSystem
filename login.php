@@ -83,6 +83,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
     
+    // check if email is empty
+    if(empty(trim($_POST["email"]))){
+        $email_err = "Please enter your email.";
+    } else{
+        $email = trim($_POST["email"]);
+    }
+    Gender:
+    <input type="radio" name="gender"
+    <?php if (isset($gender) && $gender=="female") echo "checked";?>
+    value="female">Female
+    <input type="radio" name="gender"
+    <?php if (isset($gender) && $gender=="male") echo "checked";?>
+    value="male">Male
+    <input type="radio" name="gender"
+    <?php if (isset($gender) && $gender=="other") echo "checked";?>
+    value="other">Other
+
     // Close connection
     mysqli_close($link);
 }
@@ -122,9 +139,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>">
+                <span class="invalid-feedback"><?php echo $email_err; ?></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+            <p>Don't have an account? <a href="register.php">register now</a>.</p>
         </form>
     </div>
 </body>
