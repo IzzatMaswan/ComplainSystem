@@ -12,14 +12,14 @@ else
     }
 
 
-if (strlen($_POST["comments"]) >0) 
+if (strlen($_POST["complain"]) >0) 
     { 
-    $_POST["comments"] = $_POST["comments"]; 
+    $_POST["complain"] = $_POST["complain"]; 
     }
 else
     {
-    $_POST["comments"]= null;
-    echo '<p><b> You Forgot to Enter Your Comments! </b></p>';
+    $_POST["complain"]= null;
+    echo '<p><b> You Forgot to Enter Your complain! </b></p>';
     }
 if(! (strlen($_POST["email"]) >0)) 
     {
@@ -44,9 +44,9 @@ if (isset($_POST["gender"]))
     }
 
 
-if ($_POST["name"] && $_POST["comments"] && $_POST["email"] && $_POST["gender"]) 
-    { echo "Thank you," .$_POST["name"]. " for the following comments: <br /> <tt>" .
-    $_POST["comments"]. " </tt> <p> We will reply to you at <i>" . $_POST["email"]. 
+if ($_POST["name"] && $_POST["complain"] && $_POST["email"] && $_POST["gender"]) 
+    { echo "Thank you," .$_POST["name"]. " for the following complain: <br /> <tt>" .
+    $_POST["complain"]. " </tt> <p> We will reply to you at <i>" . $_POST["email"]. 
     "</i></p>"; 
     echo $message;
     }

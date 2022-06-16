@@ -20,7 +20,7 @@
             <option value="30-60">Between 30 to 60</option>
             <option value="60+">over 60</option>
         </select></p>
-        <p><b>Comments:</b><textarea name="comments" cols="50" rows="3"></textarea></p>
+        <p><b>Complain:</b><textarea name="complain" cols="50" rows="3"></textarea></p>
         <div align="center"><input type="submit" name="submit" value="Submit Information"/>
         </div>
     </form>
