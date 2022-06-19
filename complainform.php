@@ -23,7 +23,6 @@
         <p><b>Complain:</b><textarea name="complain" cols="50" rows="3"></textarea></p>
         <div align="center"><input type="submit" name="submit" value="Submit Information"/>
         </div> 
-</dic>
     </form>
 </body>
 </html>
