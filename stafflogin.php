@@ -30,6 +30,7 @@
 
 			<input class="button" type="submit"
 					name="login" value="Sign In">
+			<a href="login.php">User</a>
 		</div>
 	</form>
 </body>
