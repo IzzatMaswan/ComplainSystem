@@ -24,7 +24,7 @@
     }
 
     mysqli_free_result ($result);
-    mysqli_close();
+    mysqli_close($link);
 
     ?>
     <a href="adminpage.php" class="btn btn">Back to main page</a>
