@@ -1,21 +1,4 @@
-<?php
-include 'config.php';
 
-echo "<table border = '1'><tr><th>Username</th><th>Registeration Date</th></tr>";
-
-
-$result = mysqli_query($link, "SELECT id, username, created_at FROM `users` ");
-while ($row = mysqli_fetch_row($result)){
-    echo "<tr>";
-    foreach ($row as $cell)
-        echo "<td>$cell</td>";
-    echo "</tr>";
-}
-
-mysqli_free_result ($result);
-mysqli_close($dbc);
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +9,24 @@ mysqli_close($dbc);
     <title>Document</title>
 </head>
 <body>
+    <?php
+    include 'config.php';
+
+    echo "<table border = '1'><tr><th>Username</th><th>Registeration Date</th></tr>";
+
+
+    $result = mysqli_query($link, "SELECT id, username, created_at FROM `users` ");
+    while ($row = mysqli_fetch_row($result)){
+        echo "<tr>";
+        foreach ($row as $cell)
+            echo "<td>$cell</td>";
+        echo "</tr>";
+    }
+
+    mysqli_free_result ($result);
+    mysqli_close();
+
+    ?>
     <a href="adminpage.php" class="btn btn">Back to main page</a>
 </body>
 </html>
