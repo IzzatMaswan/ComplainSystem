@@ -24,7 +24,7 @@
 
 			<div class="textbox">
 				<i class="fa fa-lock" aria-hidden="true"></i>
-				<input type="staffpassword" placeholder="Staff Password"
+				<input type="password" placeholder="Staff Password"
 						name="staffpassword" value="">
 			</div>
 
