@@ -4,7 +4,7 @@ include 'config.php';
 echo "<table border = '1'><tr><th>Username</th><th>Registeration Date</th></tr>";
 
 
-$result = mysqli_query($conn, "SELECT id, username, created_at FROM `users` ");
+$result = mysqli_query($link, "SELECT id, username, created_at FROM `users` ");
 while ($row = mysqli_fetch_row($result)){
     echo "<tr>";
     foreach ($row as $cell)
