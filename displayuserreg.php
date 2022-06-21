@@ -1,5 +1,5 @@
 <?php
-include 'conn.php';
+include 'config.php';
 
 echo "<table border = '1'><tr><th>Username</th><th>Registeration Date</th></tr>";
 
