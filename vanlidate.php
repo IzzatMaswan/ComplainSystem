@@ -69,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare an insert statement
         $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
          
-        if($stmt = $mysqli->prepare($sql)){
+        if($stmt = $link->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("ss", $param_username, $param_password);
             
@@ -91,6 +91,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Close connection
-    $mysqli->close();
+    $link->close();
 }
 ?>
