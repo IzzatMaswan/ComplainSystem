@@ -8,9 +8,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Validate username
     if(empty(trim($_POST["Cust_Username"]))){
-        $username_err = "Please enter a username.";
+        $Cust_Username_err = "Please enter a username.";
     } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["Cust_Username"]))){
-        $username_err = "Username can only contain letters, numbers, and underscores.";
+        $Cust_Username_err = "Username can only contain letters, numbers, and underscores.";
     } else{
         // Prepare a select statement
         $sql = "SELECT Cust_ID FROM CUSTOMER WHERE Cust_Username = ?";
@@ -28,9 +28,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    $username_err = "This username is already taken.";
+                    $Cust_Username_err = "This username is already taken.";
                 } else{
-                    $username = trim($_POST["Cust_Username"]);
+                    $Cust_Username = trim($_POST["Cust_Username"]);
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
