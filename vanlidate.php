@@ -28,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare a select statement
         $sql = "SELECT id, username, password FROM users WHERE username = ?";
         
-        if($stmt = $mysqli->prepare($sql)){
+        if($stmt = $link->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("s", $param_username);
             
@@ -75,6 +75,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Close connection
-    $mysqli->close();
+    $link->close();
 }
 ?>
