@@ -1,34 +1,35 @@
 <?php
 require_once "config.php";
  
-$username = $password = $confirm_password = $Email = "";
-$Username_err = $Password_err = $confirm_password_err = $Email_err ="";
+$username = $password = $confirm_password = "";
+$username_err = $password_err = $confirm_password_err = "";
  
+// Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Validate username
     if(empty(trim($_POST["Cust_username"]))){
-        $Username_err = "Please enter a username.";
+        $username_err = "Please enter a username.";
     } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["Cust_username"]))){
-        $Username_err = "Username can only contain letters, numbers, and underscores.";
+        $username_err = "Username can only contain letters, numbers, and underscores.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT Cust_ID FROM CUSTOMER WHERE Cust_username = ?";
+        $sql = "SELECT Cust_id FROM customer WHERE Cust_username = ?";
         
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            $stmt->bind_param("s", $param_username);
             
             // Set parameters
             $param_username = trim($_POST["Cust_username"]);
             
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                /* store result */
-                mysqli_stmt_store_result($stmt);
+            if($stmt->execute()){
+                // store result
+                $stmt->store_result();
                 
-                if(mysqli_stmt_num_rows($stmt) == 1){
-                    $Username_err = "This username is already taken.";
+                if($stmt->num_rows == 1){
+                    $username_err = "This username is already taken.";
                 } else{
                     $username = trim($_POST["Cust_username"]);
                 }
@@ -37,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
 
             // Close statement
-            mysqli_stmt_close($stmt);
+            $stmt->close();
         }
     }
     
@@ -64,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($Username_err) && empty($Password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO CUSTOMER (Cust_username, Cust_password) VALUES (?, ?)";
+        $sql = "INSERT INTO customer (Cust_username, Cust_password) VALUES (?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
