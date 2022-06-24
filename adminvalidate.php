@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
 	$Staff_Username = test_input($_POST["Staff_Username"]);
 	$Staff_Password = test_input($_POST["Staff_Password"]);
-	$stmt = $conn->prepare("SELECT * FROM adminlogin");
+	$stmt = $conn->prepare("SELECT * FROM Staff");
 	$stmt->execute();
 	$staffusers = $stmt->fetchAll();
 	
