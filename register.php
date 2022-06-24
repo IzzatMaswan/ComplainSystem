@@ -1,5 +1,5 @@
 <?php
-require_once "connection.php";
+require_once "config.php";
  
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare a select statement
         $sql = "SELECT Cust_id FROM customer WHERE Cust_username = ?";
         
-        if($stmt = $conn->prepare($sql)){
+        if($stmt = $link->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("s", $param_username);
             
