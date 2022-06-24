@@ -7,21 +7,24 @@
     <title>Complain Form</title>
 </head>
 <body>
-        <form action="user.php" method = "post">
-        <p><b>Name</b><input type="text" size="12" maxlength="12" name="name"></p>
-        <p><b>Email Address:</b> <input type="text" size="12" maxlength="36" name="email"></p>
-        <p><b>Gender</b>
-        <input type="radio" name="gender" value="M"/> Male 
-        <input type="radio" name="gender" value="F"/> Female
-        </p>
-        <p><b>Age:</b>
-        <select name="age" >
-            <option value="0-30">Under 30</option>
-            <option value="30-60">Between 30 to 60</option>
-            <option value="60+">over 60</option>
-        </select></p>
-        <p><b>Complain:</b><textarea name="complain" cols="50" rows="3"></textarea></p>
-        <div align="center"><input type="submit" name="submit" value="Submit Information"/>
+        <form id="fs-frm" name="complaint-form" accept-charset="utf-8" action="user.php" method="post">
+        <fieldset id="fs-frm-inputs">
+            <label for="Cust_username">Usename</label>
+            <input type="text" name="Cust_username" id="Cust_username" placeholder="Username" required="">
+            <label for="Cust_name">Full Name</label>
+            <input type="text" name="Cust_name" id="Cust_name" placeholder="Name" required="">
+            <label for="telephone">Telephone Number (Optional)</label>
+            <input type="telephone" name="telephone" id="telephone" placeholder="(555) 555-5555">
+            <label for="Cust_address">Address</label>
+            <textarea rows="3" name="Cust_address" id="Cust_address" placeholder="Address" ></textarea>
+            <label for="Cust_email">Email Address</label>
+            <input type="email" name="Cust_email" id="Cust_email" placeholder="example: email@gmail.com" required="">
+            <label for="complaint">Complaint</label>
+            <textarea rows="6" name="complaint" id="complaint" placeholder="complain" required=""></textarea>
+            <input type="hidden" name="_subject" id="email-subject" value="Complaint Form Submission">
+        </fieldset>
+        <input type="submit" value="File Complaint">
+        </form>
         <div align="center"><a href="welcome.php" class="btn">Back</a>
         </div> 
     </form>
