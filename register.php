@@ -1,26 +1,26 @@
 <?php
 require_once "config.php";
  
-$Cust_Username = $Cust_Password = $confirm_password = $Cust_Email = "";
+$Cust_username = $Cust_password = $confirm_password = $Cust_Email = "";
 $Cust_Username_err = $Cust_Password_err = $confirm_password_err = $Cust_Email_err ="";
  
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Validate username
-    if(empty(trim($_POST["Cust_Username"]))){
+    if(empty(trim($_POST["Cust_username"]))){
         $Cust_Username_err = "Please enter a username.";
-    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["Cust_Username"]))){
+    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["Cust_username"]))){
         $Cust_Username_err = "Username can only contain letters, numbers, and underscores.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT Cust_ID FROM CUSTOMER WHERE Cust_Username = ?";
+        $sql = "SELECT Cust_ID FROM CUSTOMER WHERE Cust_username = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             
             // Set parameters
-            $param_username = trim($_POST["Cust_Username"]);
+            $param_username = trim($_POST["Cust_username"]);
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     $Cust_Username_err = "This username is already taken.";
                 } else{
-                    $Cust_Username = trim($_POST["Cust_Username"]);
+                    $Cust_username = trim($_POST["Cust_username"]);
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -42,12 +42,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Validate password
-    if(empty(trim($_POST["Cust_Password"]))){
+    if(empty(trim($_POST["Cust_password"]))){
         $Cust_Password_err = "Please enter a password.";     
-    } elseif(strlen(trim($_POST["Cust_Password"])) < 6){
+    } elseif(strlen(trim($_POST["Cust_password"])) < 6){
         $Cust_Password_err = "Password must have atleast 6 characters.";
     } else{
-        $Cust_Password = trim($_POST["Cust_Password"]);
+        $Cust_password = trim($_POST["Cust_password"]);
     }
     
     // Validate confirm password
@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $confirm_password_err = "Please confirm password.";     
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
-        if(empty($Cust_Password_err) && ($Cust_Password != $confirm_password)){
+        if(empty($Cust_Password_err) && ($Cust_password != $confirm_password)){
             $confirm_password_err = "Password did not match.";
         }
     }
@@ -64,15 +64,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($Cust_Username_err) && empty($Cust_Password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO CUSTOMER (Cust_Username, Cust_Password) VALUES (?, ?)";
+        $sql = "INSERT INTO CUSTOMER (Cust_username, Cust_password) VALUES (?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
             
             // Set parameters
-            $param_Cust_Username = $Cust_Username;
-            $param_Cust_Password = password_hash($Cust_Password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_Cust_Username = $Cust_username;
+            $param_Cust_Password = password_hash($Cust_password, PASSWORD_DEFAULT); // Creates a password hash
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -110,12 +110,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="Cust_Username" class="form-control <?php echo (!empty($Cust_Username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $Cust_Username; ?>">
+                <input type="text" name="Cust_username" class="form-control <?php echo (!empty($Cust_Username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $Cust_username; ?>">
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="Cust_Password" class="form-control <?php echo (!empty($Cust_Password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $Cust_Password; ?>">
+                <input type="password" name="Cust_password" class="form-control <?php echo (!empty($Cust_Password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $Cust_password; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
