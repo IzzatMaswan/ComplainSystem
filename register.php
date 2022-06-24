@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare a select statement
         $sql = "SELECT Cust_id FROM customer WHERE Cust_username = ?";
         
-        if($stmt = $mysqli->prepare($sql)){
+        if($stmt = $link->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("s", $param_username);
             
