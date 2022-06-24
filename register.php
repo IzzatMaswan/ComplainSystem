@@ -1,16 +1,16 @@
 <?php
 require_once "config.php";
  
-$Cust_username = $Cust_password = $confirm_password = $Cust_Email = "";
-$Cust_Username_err = $Cust_Password_err = $confirm_password_err = $Cust_Email_err ="";
+$username = $password = $confirm_password = $Email = "";
+$Username_err = $Password_err = $confirm_password_err = $Email_err ="";
  
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Validate username
     if(empty(trim($_POST["Cust_username"]))){
-        $Cust_Username_err = "Please enter a username.";
+        $Username_err = "Please enter a username.";
     } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["Cust_username"]))){
-        $Cust_Username_err = "Username can only contain letters, numbers, and underscores.";
+        $Username_err = "Username can only contain letters, numbers, and underscores.";
     } else{
         // Prepare a select statement
         $sql = "SELECT Cust_ID FROM CUSTOMER WHERE Cust_username = ?";
@@ -28,9 +28,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    $Cust_Username_err = "This username is already taken.";
+                    $Username_err = "This username is already taken.";
                 } else{
-                    $Cust_username = trim($_POST["Cust_username"]);
+                    $username = trim($_POST["Cust_username"]);
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -43,11 +43,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Validate password
     if(empty(trim($_POST["Cust_password"]))){
-        $Cust_Password_err = "Please enter a password.";     
+        $Password_err = "Please enter a password.";     
     } elseif(strlen(trim($_POST["Cust_password"])) < 6){
-        $Cust_Password_err = "Password must have atleast 6 characters.";
+        $Password_err = "Password must have atleast 6 characters.";
     } else{
-        $Cust_password = trim($_POST["Cust_password"]);
+        $password = trim($_POST["Cust_password"]);
     }
     
     // Validate confirm password
@@ -55,13 +55,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $confirm_password_err = "Please confirm password.";     
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
-        if(empty($Cust_Password_err) && ($Cust_password != $confirm_password)){
+        if(empty($Password_err) && ($password != $confirm_password)){
             $confirm_password_err = "Password did not match.";
         }
     }
     
     // Check input errors before inserting in database
-    if(empty($Cust_Username_err) && empty($Cust_Password_err) && empty($confirm_password_err)){
+    if(empty($Username_err) && empty($Password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
         $sql = "INSERT INTO CUSTOMER (Cust_username, Cust_password) VALUES (?, ?)";
@@ -71,8 +71,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
             
             // Set parameters
-            $param_Cust_Username = $Cust_username;
-            $param_Cust_Password = password_hash($Cust_password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_Username = $Cust_username;
+            $param_Password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -105,18 +105,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <div class="wrapper">
-        <h2>Sign here</h2>
+        <h2>Sign Up here</h2>
         <p>Please fill this form to create an account.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="Cust_username" class="form-control <?php echo (!empty($Cust_Username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $Cust_username; ?>">
+                <input type="text" name="Cust_username" class="form-control <?php echo (!empty($Username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
                 <span class="invalid-feedback"><?php echo $Cust_username_err; ?></span>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="Cust_password" class="form-control <?php echo (!empty($Cust_Password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $Cust_password; ?>">
-                <span class="invalid-feedback"><?php echo $Cust_password_err; ?></span>
+                <input type="password" name="Cust_password" class="form-control <?php echo (!empty($Password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
+                <span class="invalid-feedback"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
                 <label>Confirm Password</label>
