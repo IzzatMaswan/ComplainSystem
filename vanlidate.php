@@ -3,17 +3,17 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$Cust_Username = $Cust_password = "";
+$Cust_username = $Cust_password = "";
 $Cust_Username_err = $Cust_password_err = $login_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    // Check if Cust_Username is empty
-    if(empty(trim($_POST["Cust_Username"]))){
+    // Check if Cust_username is empty
+    if(empty(trim($_POST["Cust_username"]))){
         $Cust_Username_err = "Please enter Username.";
     } else{
-        $Cust_Username = trim($_POST["Cust_Username"]);
+        $Cust_username = trim($_POST["Cust_username"]);
     }
     
     // Check if Cust_password is empty
@@ -26,24 +26,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($Cust_Username_err) && empty($Cust_password_err)){
         // Prepare a select statement
-        $sql = "SELECT Cust_ID, Cust_Username, Cust_password FROM customer WHERE Cust_Username = ?";
+        $sql = "SELECT Cust_ID, Cust_username, Cust_password FROM customer WHERE Cust_username = ?";
         
         if($stmt = $link->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("s", $param_Cust_Username);
             
             // Set parameters
-            $param_Cust_Username = $Cust_Username;
+            $param_Cust_Username = $Cust_username;
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Store result
                 $stmt->store_result();
                 
-                // Check if Cust_Username exists, if yes then verify Cust_password
+                // Check if Cust_username exists, if yes then verify Cust_password
                 if($stmt->num_rows == 1){                    
                     // Bind result variables
-                    $stmt->bind_result($Cust_ID, $Cust_Username, $hashed_password);
+                    $stmt->bind_result($Cust_ID, $Cust_username, $hashed_password);
                     if($stmt->fetch()){
                         if(password_verify($Cust_password, $hashed_password)){
                             // Password is correct, so start a new session
@@ -52,18 +52,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["Cust_ID"] = $Cust_ID;
-                            $_SESSION["Cust_Username"] = $Cust_Username;                            
+                            $_SESSION["Cust_username"] = $Cust_username;                            
                             
                             // Redirect user to welcome page
                             header("location: welcome.php");
                         } else{
                             // Password is not valid, display a generic error message
-                            $login_err = "Invalid Cust_Username or Cust_password.";
+                            $login_err = "Invalid Cust_username or Cust_password.";
                         }
                     }
                 } else{
-                    // Cust_Username doesn't exist, display a generic error message
-                    $login_err = "Invalid Cust_Username or Cust_password.";
+                    // Cust_username doesn't exist, display a generic error message
+                    $login_err = "Invalid Cust_username or Cust_password.";
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
