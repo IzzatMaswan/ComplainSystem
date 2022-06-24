@@ -111,12 +111,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <label>Username</label>
                 <input type="text" name="Cust_username" class="form-control <?php echo (!empty($Cust_Username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $Cust_username; ?>">
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                <span class="invalid-feedback"><?php echo $Cust_username_err; ?></span>
             </div>
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="Cust_password" class="form-control <?php echo (!empty($Cust_Password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $Cust_password; ?>">
-                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                <span class="invalid-feedback"><?php echo $Cust_password_err; ?></span>
             </div>
             <div class="form-group">
                 <label>Confirm Password</label>
