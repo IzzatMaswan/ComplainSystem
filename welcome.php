@@ -20,7 +20,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </style>
 </head>
 <body>
-    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to J&T complain sytem.</h1>
+    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["Cust_username"]); ?></b>. Welcome to J&T complain sytem.</h1>
     <p>
         <p> Please state your complain in the form below, buat form pi compain dan check status or reply about complain </p>
         <a href="resetpassword.php" class="btn btn">Reset Your Password</a>
