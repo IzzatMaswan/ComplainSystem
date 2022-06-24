@@ -71,7 +71,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
             
             // Set parameters
-            $param_Username = $Cust_username;
+            $param_Username = $username;
             $param_Password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
 
             // Attempt to execute the prepared statement
