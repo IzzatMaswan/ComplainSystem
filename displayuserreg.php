@@ -15,7 +15,7 @@
     echo "<table border = '1'><tr><th>Username</th><th>Registeration Date</th></tr>";
 
 
-    $result = mysqli_query($link, "SELECT id, username, created_at FROM `users` ");
+    $result = mysqli_query($link, "SELECT Cust_ID, Cust_Username, created_at FROM `customer` ");
     while ($row = mysqli_fetch_row($result)){
         echo "<tr>";
         foreach ($row as $cell)

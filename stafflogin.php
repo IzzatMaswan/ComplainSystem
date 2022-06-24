@@ -19,13 +19,13 @@
 			<div class="textbox">
 				<i class="fa fa-user" aria-hidden="true"></i>
 				<input type="text" placeholder="Staff Username"
-						name="staffusername" value="">
+						name="Staff_Username" value="">
 			</div>
 
 			<div class="textbox">
 				<i class="fa fa-lock" aria-hidden="true"></i>
 				<input type="password" placeholder="Staff Password"
-						name="staffpassword" value="">
+						name="Staff_Password" value="">
 			</div>
 
 			<input class="button" type="submit"
